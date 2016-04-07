@@ -3,42 +3,39 @@ var sync = require('synchronize');
 var request = require('request');
 var _ = require('underscore');
 
-
-// The API that returns the in-email representation.
 module.exports = function(req, res) {
+  res.NODE_DEBUG = true;
   var url = req.query.url.trim();
-
-  // Giphy image urls are in the format:
-  // http://giphy.com/gifs/<seo-text>-<alphanumeric id>
-  var matches = url.match(/\-([a-zA-Z0-9]+)$/);
+  // https://wanelo.com/p/38126141/s/2ZyLl-eiya-4leNN
+  var matches = url.match(/wanelo\.com\/p\/([a-zA-Z0-9]+)/);
   if (!matches) {
     res.status(400).send('Invalid URL format');
     return;
   }
 
-  var id = matches[1];
+  var productId = matches[1];
+  var productJsonUrl = 'https://wanelo.com/p/' + encodeURIComponent(productId) + '.json';
+  var request = require('request');
 
-  var response;
-  try {
-    response = sync.await(request({
-      url: 'http://api.giphy.com/v1/gifs/' + encodeURIComponent(id),
-      qs: {
-        api_key: key
-      },
-      gzip: true,
-      json: true,
-      timeout: 15 * 1000
-    }, sync.defer()));
-  } catch (e) {
-    res.status(500).send('Error');
-    return;
-  }
+  request(productJsonUrl, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var productJson = JSON.parse(response.body);
+      var html =
+        '<table style="border: 1px solid #f0cc00; padding: 10px; width: 500px; font-family: HelveticaNeue, Helvetica, Ariel, sans-serif; font-size: 10pt;">' +
+          '<tr style="vertical-align: top; text-align: left;">' +
+            '<td width="200"><img style="max-width:100%; border: 1px solid #29a2ff; box-shadow: 0 0 6px #202020;" src="' + productJson.images.x200 + '" width="200"/></td>' +
+            '<td style="padding-left: 30px; padding-right: 30px;"><h2>' + productJson.name + '</h2>From <strong><a href="' + productJson.store.object_url + '">' + productJson.store.name + '</a></strong></td>' +
+            '<td><h2>$' + (productJson.price_cents / 1000 ).toString() + '</h2></td>' +
+          '</tr>' +
+        '</table>';
 
-  var image = response.body.data.images.original;
-  var width = image.width > 600 ? 600 : image.width;
-  var html = '<img style="max-width:100%;" src="' + image.url + '" width="' + width + '"/>';
-  res.json({
-    body: html
-    // Add raw:true if you're returning content that you want the user to be able to edit
+      res.json({
+        body: html
+        // Add raw:true if you're returning content that you want the user to be able to edit
+      });
+    } else {
+      res.status(response.statusCode).send('Error contacting wanelo, url was ' + productJsonUrl + ', and error is ' + error);
+      return;
+    }
   });
 };
