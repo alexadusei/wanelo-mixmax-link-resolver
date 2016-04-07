@@ -17,3 +17,9 @@ To simulate locally how Mixmax calls the resolver URL (to return HTML that goes 
 ```
 curl http://localhost:9146/resolver?url=https://wanelo.com/p/38126141
 ```
+
+## To run all tests;
+
+```bash
+mocha
+```

@@ -1,10 +1,11 @@
 {
   "name": "wanelo-mixmax-app",
-  "version": "0.0.1",
-  "description": "Wanelo App for Mixmax",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Wanelo Product URL Resolver for Mixmax",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "./node_modules/.bin/mocha --colors --slow 10 --timeout 500 --full-trace --reporter spec test/specs"
   },
   "repository": {
     "type": "git",
@@ -12,6 +13,10 @@
   },
   "author": "Konstantin Gredeskoul <kig@reinvent.one> (http://kig.re)",
   "license": "MIT",
+  "keywords": [
+    "MixMax",
+    "Wanelo"
+  ],
   "bugs": {
     "url": "https://github.com/kister/wanelo-mixmax-app/issues"
   },
@@ -19,13 +24,15 @@
   "dependencies": {
     "body-parser": "^1.12.2",
     "cors": "^2.7.1",
-    "express": "^4.12.3",
     "request": "^2.64.0",
     "synchronize": "^0.9.14",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "nodemon": "^1.7.1",
+    "sprintf-js": "^1.0.3",
+    "chai": "^3.5.0",
+    "express": "^4.13.4",
     "mocha": "^2.4.5"
   }
 }
