@@ -30,6 +30,9 @@ describe('Wanelo Product', function() {
     it('should extract product name', function() {
       expect(product.name()).to.eql('Saucony Shadow 6000 Suede "Irish Coffee Pack" - Black Coffee');
     });
+    it('should shorten long product name', function() {
+      expect(product.name(30)).to.eql('Saucony Shadow 6000 Suede "Iri&hellip;');
+    });
     it('should extract product image', function() {
       expect(product.image()).to.eql('https://cdn-img-3.wanelo.com/p/7c4/222/ba8/6599e4086a01b2285716b41/x200-q90.jpg');
     });
