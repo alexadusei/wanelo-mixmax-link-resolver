@@ -37,10 +37,10 @@ describe('Wanelo Product', function() {
       expect(product.store()).to.eql('jiberish.com');
     });
     it('should extract product price', function() {
-      expect(product.price()).to.eql(12.00);
+      expect(product.price()).to.eql(120.00);
     });
     it('should format product price', function() {
-      expect(product.priceFormatted()).to.eql("$12.00");
+      expect(product.priceFormatted()).to.eql("$120.00");
     });
     it('should extract product currency', function() {
       expect(product.currency()).to.eql('$');
@@ -58,7 +58,7 @@ describe('Wanelo Product', function() {
       expect(html).to.match(/Saucony Shadow 6000 Suede \"Irish Coffee Pack\" - Black Coffee<\/h2>/);
     });
     it('should return HTML matching the formatted price', function() {
-      expect(html).to.match(/\$12\.00<\/h1>/);
+      expect(html).to.match(/\$120\.00<\/h1>/);
     });
     it('should return HTML matching store URL', function() {
       expect(html).to.match(/http:\/\/wanelo.com\/store\/jiberish/);
