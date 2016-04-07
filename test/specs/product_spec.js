@@ -58,10 +58,13 @@ describe('Wanelo Product', function() {
       expect(html).to.match(/Saucony Shadow 6000 Suede \"Irish Coffee Pack\" - Black Coffee<\/h2>/);
     });
     it('should return HTML matching the formatted price', function() {
-      expect(html).to.match(/<h2>\$12\.00<\/h2>/);
+      expect(html).to.match(/\$12\.00<\/h1>/);
     });
     it('should return HTML matching store URL', function() {
       expect(html).to.match(/http:\/\/wanelo.com\/store\/jiberish/);
+    });
+    it('should return HTML with a product link', function() {
+      expect(html).to.match(/<a href="http:\/\/wanelo.com\/p\/38126141\/saucony-shadow-6000-suede-irish-coffee-pack-black-coffee">/);
     });
   });
 });
