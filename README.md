@@ -47,7 +47,7 @@ product URL, and run it as below:
 curl http://localhost:9146/resolver?url=https://wanelo.com/p/38126141
 ```
 
-## To run Mocha tests;
+## To run Mocha tests
 
 ```bash
 npm test
