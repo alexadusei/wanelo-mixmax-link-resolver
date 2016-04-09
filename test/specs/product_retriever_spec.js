@@ -11,6 +11,9 @@ const helper = new (require('../spec_helper'));
 const ProductRetriever = require("../../lib/product_retriever");
 
 describe('Product Retriever', function() {
+
+  this.timeout(2000);
+
   var fixture;
   let url = "https://wanelo.com/p/38126141/saucony-shadow-6000-suede-irish-coffee-pack-black-coffee";
   let shortUrl = "https://wanelo.com/p/38126141";
@@ -26,17 +29,34 @@ describe('Product Retriever', function() {
 
   it('validates the URL', () => {
     var retriever = new ProductRetriever(url);
-    expect(retriever.constructUrl()).to.eql(true);
+    expect(retriever.parse()).to.eql(true);
     expect(retriever.productUrl).to.eql(shortUrl + '.json');
   });
 
-  it('actually retrieves data', () => {
-    var retriever = new ProductRetriever(url);
-    expect(retriever.retrieveJSON()).to.eql(false);
-    expect(retriever.constructUrl()).to.eql(true);
-    expect(retriever.retrieveJSON()).to.eql(true);
-    expect(retriever.result['code']).to.eql(200);
-    expect(retriever.result['body']).to.match(/{"id":38126141,"name":"Saucony Shadow/)
+  describe('fetching the data', () => {
+    it('sends off and processes HTTP request', (done) => {
+      var retriever = new ProductRetriever(url);
+      expect(retriever.retrieve((result) => {
+        done();
+        expect(result.code).to.eql(200);
+        expect(result.body).to.match(/{"id":38126141,"name":"Saucony Shadow/)
+      }));
+    });
+    it('can deal with invalid URLs', (done) => {
+      var retriever = new ProductRetriever("https://wanelo.com/23094029384023984023894");
+      expect(retriever.retrieve((result) => {
+        expect(result.error).to.match(/not a valid Wanelo product URL/);
+        done();
+      }));
+    });
+
+    it('can deal with a 404', (done) => {
+      var retriever = new ProductRetriever("https://wanelo.com/p/1123211212931391012");
+      expect(retriever.retrieve((result) => {
+        expect(result.code).to.eql(404);
+        done();
+      }));
+    });
   });
 
 });

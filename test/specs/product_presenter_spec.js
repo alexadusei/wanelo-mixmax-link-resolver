@@ -25,8 +25,7 @@ describe('Product Presenter', function() {
 
   describe('product HTML', () => {
     var html;
-
-
+    
     it('should return HTML matching product name', function() {
       html = presenter.html;
       expect(html).to.match(/Saucony Shadow 6000 Suede \"Irish Coffee Pack\" - Black Coffee<\/h2>/);

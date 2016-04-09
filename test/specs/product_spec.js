@@ -22,7 +22,7 @@ describe('Product', function() {
 
   it('should return a string from #loadFixtures', function() {
     expect(fixture).to.be.a('string');
-    expect(fixture.length).to.eql(5346);
+    expect(fixture.length).to.eql(6220);
   });
 
   describe('product JSON', function() {
