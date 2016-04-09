@@ -1,13 +1,23 @@
 const request = require('request');
 const Product = require('../lib/product');
-const sync = require('synchronize');
-const _ = require('underscore');
+const ProductPresenter = require('../lib/product_presenter');
+const ProductRetriever = require('../lib/product_retriever');
 
 module.exports = function(req, res) {
   res.NODE_DEBUG = true;
+  var debug = req.query.debug;
   var url = req.query.url.trim();
+
+  const retriever = new ProductRetriever(url);
+
+  result = retriever.retrieve()
+
+
   // https://wanelo.com/p/38126141/s/2ZyLl-eiya-4leNN
-  var matches = url.match(/wanelo\.com\/p\/([a-zA-Z0-9]+)/);
+  var matches = false;
+  if (url)
+    matches = url.match(/wanelo\.com\/p\/([a-zA-Z0-9]+)/);
+
   if (!matches) {
     res.status(400).send('Invalid URL format');
     return;
