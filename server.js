@@ -14,6 +14,7 @@ var corsOptions = {
   credentials: true
 };
 
+app.use(express.static('public'));
 app.get('/resolver', cors(corsOptions), require('./api/resolver'));
 
 app.listen(process.env.PORT || 9146);
