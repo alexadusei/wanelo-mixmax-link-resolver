@@ -9,6 +9,7 @@ const describe = require("mocha/lib/mocha").describe;
 const it = require("mocha/lib/mocha.js").it;
 const Product = require("../../lib/product");
 
+const BoxDimensions = require("../../lib/box_dimensions");
 const ProductPresenter = require("../../lib/product_presenter");
 var before = require("mocha/lib/mocha").before;
 
@@ -39,6 +40,16 @@ describe('Product Presenter', function() {
     it('should return HTML with a product link', function() {
       expect(html).to.match(/<a href="http:\/\/wanelo.com\/p\/38126141\/saucony-shadow-6000-suede-irish-coffee-pack-black-coffee">/);
     });
+  });
+
+
+  describe('decimal digits', () => {
+    it('should correctly calculate number of digits in a decimal number', () => {
+      expect(BoxDimensions.decimalDigits(5)).to.eql(1);
+      expect(BoxDimensions.decimalDigits(15)).to.eql(2);
+      expect(BoxDimensions.decimalDigits(215)).to.eql(3);
+      expect(BoxDimensions.decimalDigits(1234567890)).to.eql(10);
+    })
   });
 
 });
