@@ -27,12 +27,6 @@ You should now be able to compose a new email, and paste any Wanelo Product URL,
 
 I'd like to note that the above URL is running on a free Heroku tier, and so it may take a few seconds to boot up the first time you use it.
 
-### Using the Preview Mode
-
-Unlike they example Giphy resolver, this resolver comes with a simple way to preview straight in the browser the output it generates, both in `JSON` and `HTML` form. This can be rather handy when working on the actual HTMl widget.
-
-Instead of going to the `/resolver` page, just hit the home page of the resolver, and enter the product URL.
-
 ### Limitations
 
  * This will only work for wanelo products. User profiles, store profiles, etc. are not currently supported.
@@ -55,11 +49,27 @@ product URL, and run it as below:
 curl http://localhost:9146/resolver?url=https://wanelo.com/p/38126141
 ```
 
-## To run Mocha tests
+### Using the Preview Mode
+
+This resolver adds a simple way to preview — straight in the browser — the output from the resolver given a URL, both in `JSON` and `HTML` forms. This can be rather handy when developing the actual HTMl widget.
+
+Instead of going to the `/resolver` page, just hit the home page of the resolver, and enter the product URL. Your should see something like this below:
+
+![example](doc/mixmax-debug.png)
+
+Once you submit the form, and assuming you checked the `preview` box, you should see the full widget preview in your browser.
+
+!["Live" Preview of the Widget](doc/mixmax-debug-result.png)
+
+## Tests
+
+The project uses Mocha library for tests, which can be run as follows: 
 
 ```bash
 npm test
 ```
+
+![Running Tests](doc/mixmax-tests.png)
 
 ## Contributing
 
@@ -68,12 +78,11 @@ Bug reports and pull requests are welcome on GitHub at [https://github.com/kigst
 ## Author
 
 <p>&copy; 2016 Konstantin Gredeskoul, all rights reserved.</p>
-
+![title](file:///var/folders/dz/r8zs2sh953qd1k19gr0q3tj00000gn/T/DMDAF058E9C-F0FB-4DAB-92EF-BC0F07CD2962/mixmax-tests.png)
 Forked originally from the MixMax tutorial provided by
 
 <p>&copy; 2015 MixMax, Inc. </p>
 
 ## License
 
-This project is distributed under the [MIT License](https://raw.githubusercontent.com/kigster/wanelo-mixmax-link-resolver/master/LICENSE).
-
+This project is distributed under the [MIT License](https://raw.githubusercontent.com/kigster/wanelo-mixmax-link-resolver/master/LICENSE).\
