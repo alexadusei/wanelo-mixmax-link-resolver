@@ -25,6 +25,14 @@ To install the link resolver for your account, follow these instructions:
 
 You should now be able to compose a new email, and paste any Wanelo Product URL, and see a fine preview of Wanelo product.
 
+I'd like to note that the above URL is running on a free Heroku tier, and so it may take a few seconds to boot up the first time you use it.
+
+### Using the Preview Mode
+
+Unlike they example Giphy resolver, this resolver comes with a simple way to preview straight in the browser the output it generates, both in `JSON` and `HTML` form. This can be rather handy when working on the actual HTMl widget.
+
+Instead of going to the `/resolver` page, just hit the home page of the resolver, and enter the product URL.
+
 ### Limitations
 
  * This will only work for wanelo products. User profiles, store profiles, etc. are not currently supported.
